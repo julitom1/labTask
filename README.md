@@ -83,5 +83,5 @@
 # Punto 1 del laboratorio
 
 https://github.com/julitom1/laboratorio1
->>>>>>> 43bc2d145f6bff0dbfe42ede40fc0567e6b6aca7
+
 
