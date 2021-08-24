@@ -46,9 +46,9 @@ public class TaskController {
     public ResponseEntity<Task> findById( @PathVariable String id )
     {
     	try {
-            return new ResponseEntity<>(taskService.findById(id),HttpStatus.ACCEPTED);
+            return new ResponseEntity<>(taskService.findById(id),HttpStatus.FOUND);
         }catch(Exception e) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
     
@@ -58,7 +58,7 @@ public class TaskController {
     {
     	try {
     		Task task=new Task(taskDto.getName(),taskDto.getDescription(),taskDto.getStatus(),taskDto.getAssignedTo(),taskDto.getDueDate(),taskDto.getCreated());
-            return new ResponseEntity<>(taskService.create(task),HttpStatus.ACCEPTED);
+            return new ResponseEntity<>(taskService.create(task),HttpStatus.CREATED);
         }catch(Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
@@ -72,7 +72,7 @@ public class TaskController {
     		task.setId(id);
             return new ResponseEntity<>(taskService.update(task, id),HttpStatus.ACCEPTED);
         }catch(Exception e) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
@@ -83,7 +83,7 @@ public class TaskController {
     		taskService.deleteById(id);
             return new ResponseEntity<>(true,HttpStatus.ACCEPTED);
         }catch(Exception e) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
