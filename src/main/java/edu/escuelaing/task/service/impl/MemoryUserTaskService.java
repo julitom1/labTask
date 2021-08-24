@@ -1,6 +1,8 @@
 package edu.escuelaing.task.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.springframework.stereotype.Service;
 
@@ -10,34 +12,59 @@ import edu.escuelaing.task.service.TaskService;
 @Service
 public class MemoryUserTaskService implements TaskService{
 
+	private static final ConcurrentHashMap<String,Task> tasks=new ConcurrentHashMap<>();
 	@Override
 	public Task create(Task task) {
-		// TODO Auto-generated method stub
-		return null;
+		task.setId(generarId());
+		tasks.put(task.getId(), task);
+		return task;
 	}
 
 	@Override
 	public Task findById(String id) {
-		// TODO Auto-generated method stub
-		return null;
+		Task task=null;
+		if(tasks.containsKey(id)) {
+			task=tasks.get(id);
+		}
+		return task;
 	}
 
 	@Override
 	public List<Task> all() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Task> taskList=new ArrayList<>();
+        for(String userId : tasks.keySet()){
+        	taskList.add(tasks.get(userId));
+        }
+        return taskList;
 	}
 
 	@Override
 	public void deleteById(String id) {
-		// TODO Auto-generated method stub
+		if(tasks.containsKey(id)) {
+			tasks.remove(id);
+		}
 		
 	}
 
 	@Override
 	public Task update(Task task, String id) {
-		// TODO Auto-generated method stub
-		return null;
+		Task taskNew=null;
+		if(tasks.containsKey(id)) {
+			tasks.put(id,task);
+			taskNew=tasks.get(id);
+		}
+		return taskNew;
 	}
+	
+	private String generarId() {
+    	int mayorId=0;
+    	for(String userId : tasks.keySet()){
+        	if(mayorId<Integer.parseInt(userId)) {
+        		mayorId=Integer.parseInt(userId);
+        	}
+        }
+    	mayorId+=1; 
+    	return mayorId+"";
+    }
 
 }
