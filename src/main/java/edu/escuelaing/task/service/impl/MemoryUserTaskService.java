@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import edu.escuelaing.task.data.Task;
 import edu.escuelaing.task.service.TaskService;
+import edu.escuelaing.task.service.TaskServiceNotFoundException;
 
 @Service
 public class MemoryUserTaskService implements TaskService{
@@ -21,10 +22,12 @@ public class MemoryUserTaskService implements TaskService{
 	}
 
 	@Override
-	public Task findById(String id) {
+	public Task findById(String id) throws TaskServiceNotFoundException {
 		Task task=null;
 		if(tasks.containsKey(id)) {
 			task=tasks.get(id);
+		}else {
+			throw new TaskServiceNotFoundException("Not found TaskService with id: "+id);
 		}
 		return task;
 	}
@@ -39,19 +42,23 @@ public class MemoryUserTaskService implements TaskService{
 	}
 
 	@Override
-	public void deleteById(String id) {
+	public void deleteById(String id) throws TaskServiceNotFoundException {
 		if(tasks.containsKey(id)) {
 			tasks.remove(id);
+		}else {
+			throw new TaskServiceNotFoundException("Not found TaskService with id: "+id);
 		}
 		
 	}
 
 	@Override
-	public Task update(Task task, String id) {
+	public Task update(Task task, String id) throws TaskServiceNotFoundException {
 		Task taskNew=null;
 		if(tasks.containsKey(id)) {
 			tasks.put(id,task);
 			taskNew=tasks.get(id);
+		}else {
+			throw new TaskServiceNotFoundException("Not found TaskService with id: "+id);
 		}
 		return taskNew;
 	}
