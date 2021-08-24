@@ -1,5 +1,7 @@
 package edu.escuelaing.task.dto;
 
+import java.time.LocalDate;
+
 import edu.escuelaing.task.Status;
 
 public class TaskDto {
@@ -8,7 +10,7 @@ public class TaskDto {
 	private String description;
 	private Status status;
 	private String assignedTo;
-	private String dueDate;
+	private LocalDate dueDate;
 	private String created;
 	
 	public TaskDto() {}
@@ -36,10 +38,11 @@ public class TaskDto {
 	public void setAssignedTo(String assignedTo) {
 		this.assignedTo = assignedTo;
 	}
-	public String getDueDate() {
+	
+	public LocalDate getDueDate() {
 		return dueDate;
 	}
-	public void setDueDate(String dueDate) {
+	public void setDueDate(LocalDate dueDate) {
 		this.dueDate = dueDate;
 	}
 	public String getCreated() {

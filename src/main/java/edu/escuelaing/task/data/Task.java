@@ -1,5 +1,7 @@
 package edu.escuelaing.task.data;
 
+import java.time.LocalDate;
+
 import edu.escuelaing.task.Status;
 
 public class Task {
@@ -9,12 +11,12 @@ public class Task {
 	private String description;
 	private Status status;
 	private String assignedTo;
-	private String dueDate;
+	private LocalDate dueDate;
 	private String created;
 	
 	
 	
-	public Task(String name, String description, Status status, String assignedTo, String dueDate, String created) {
+	public Task(String name, String description, Status status, String assignedTo, LocalDate dueDate, String created) {
 		
 		this.name = name;
 		this.description = description;
@@ -53,10 +55,10 @@ public class Task {
 	public void setAssignedTo(String assignedTo) {
 		this.assignedTo = assignedTo;
 	}
-	public String getDueDate() {
+	public LocalDate getDueDate() {
 		return dueDate;
 	}
-	public void setDueDate(String dueDate) {
+	public void setDueDate(LocalDate dueDate) {
 		this.dueDate = dueDate;
 	}
 	public String getCreated() {

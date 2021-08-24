@@ -69,7 +69,6 @@ public class TaskController {
     {
     	try {
     		Task task=new Task(taskDto.getName(),taskDto.getDescription(),taskDto.getStatus(),taskDto.getAssignedTo(),taskDto.getDueDate(),taskDto.getCreated());
-    		task.setId(id);
             return new ResponseEntity<>(taskService.update(task, id),HttpStatus.ACCEPTED);
         }catch(Exception e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -83,7 +82,7 @@ public class TaskController {
     		taskService.deleteById(id);
             return new ResponseEntity<>(true,HttpStatus.ACCEPTED);
         }catch(Exception e) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(false,HttpStatus.NOT_FOUND);
         }
     }
 

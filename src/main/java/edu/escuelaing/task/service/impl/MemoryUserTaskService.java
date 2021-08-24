@@ -54,6 +54,7 @@ public class MemoryUserTaskService implements TaskService{
 	@Override
 	public Task update(Task task, String id) throws TaskServiceNotFoundException {
 		Task taskNew=null;
+		task.setId(id);
 		if(tasks.containsKey(id)) {
 			tasks.put(id,task);
 			taskNew=tasks.get(id);
